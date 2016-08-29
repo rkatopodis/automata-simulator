@@ -1,0 +1,22 @@
+{
+  "name": "automata-simulator",
+  "version": "1.0.0",
+  "description": "Automata simulator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RafaelFK/automata-simulator.git"
+  },
+  "keywords": [
+    "Automata"
+  ],
+  "author": "Rafael Katopodis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RafaelFK/automata-simulator/issues"
+  },
+  "homepage": "https://github.com/RafaelFK/automata-simulator#readme"
+}

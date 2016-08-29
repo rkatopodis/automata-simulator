@@ -1,0 +1,32 @@
+[
+	{
+		state: '1',
+		symbol: '0',
+		nextState: '1'
+	},
+	{
+		state: '1',
+		symbol: '1',
+		nextState: '2'
+	},
+	{
+		state: '2',
+		symbol: '1',
+		nextState: '2'
+	},
+	{
+		state: '2',
+		symbol: '0',
+		nextState: '3'
+	},
+	{
+		state: '3',
+		symbol: '0',
+		nextState: '2'
+	},
+	{
+		state: '3',
+		symbol: '1',
+		nextState: '2'
+	}
+]
