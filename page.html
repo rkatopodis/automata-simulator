@@ -1,0 +1,162 @@
+<html>
+
+<input name="teste" id="teste" type="teste"></input><br>
+<input name="button" id="button" tag="button" type="submit" value="button" onclick="addCircle();"></input><br>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<script>
+	var cv, ctx;
+	var fps = 60;
+
+	window.onload = function() {
+		cv = document.getElementById("gameCanvas");
+		ctx = cv.getContext("2d");
+		setInterval(function() {
+			draw(ctx);
+		}, 1000/fps);
+
+		console.log(automata().compute('0'));
+	}
+
+	function draw(ctx) {
+		colorRect(0, 0, cv.width, cv.height, "black");
+
+		ctx.fillStyle = "white";
+		ctx.font = "30px Arial";
+		ctx.fillText(document.getElementById("teste").value, 10, 50);
+	}
+
+	function colorRect(leftX, topY, width, height, drawColor) {
+		ctx.fillStyle = drawColor;
+		ctx.fillRect(leftX, topY, width, height);
+	}
+
+	function colorCircle(leftX, topY, radius, sAngle, eAngle, drawColor) {
+		ctx.beginPath();
+		ctx.arc(leftX, topY, radius, sAngle, eAngle);
+		ctx.strokeStyle = drawColor;
+		ctx.stroke();
+	}
+
+	function automata() {
+		//automata components
+		//Hard-coded example
+		var alphabet = ['0', '1'],
+			states = ['1', '2', '3'],
+			initialState = '1',
+			finalStates = ['2'],
+			transitions = [
+				{
+					state: '1',
+					symbol: '0',
+					nextState: '1'
+				},
+				{
+					state: '1',
+					symbol: '1',
+					nextState: '2'
+				},
+				{
+					state: '2',
+					symbol: '1',
+					nextState: '2'
+				},
+				{
+					state: '2',
+					symbol: '0',
+					nextState: '3'
+				},
+				{
+					state: '3',
+					symbol: '0',
+					nextState: '2'
+				},
+				{
+					state: '3',
+					symbol: '1',
+					nextState: '2'
+				}
+			];
+
+		//var alphabet = [], states = [], initialState, finalStates = [], transitions = []; 
+			// Public API of the automata
+			return {
+				setAlphabet: function(a) {
+					// TODO: validate input (check if a is an array of strings)
+					alphabet = a;
+				},
+				getAlphabet: function() {
+					return alphabet;
+				},
+				addSymbol: function(sym) {
+					// TODO: check if sym is a string
+					alphabet.push(sym);
+				},
+				setStates: function(s) {
+					// TODO: validate input (check if is an array of strings)
+					states = s;
+				},
+				getStates: function() {
+					return states;
+				},
+				addState: function(s) {
+					// TODO: check if s is a string
+					states.push(s);
+				},
+				setInitialState: function(s) {
+					// TODO: validate input
+					initialState = s;
+				},
+				getInitialState: function() {
+					return initialState;
+				},
+				setFinalStates: function(s) {
+					// TODO: validate input (check if is an array of strings an sub set of states)
+					finalStates = s;
+				},
+				addFinalState: function(s) {
+					// TODO: check if s is a string and belongs to states set
+					finalStates.push(s);
+				},
+				setTransitions: function(t) {
+					transitions = t;
+				},
+				compute: function(word) {
+					// TODO: verify if word is composed of valid symbols
+					var newcontext = {state: initialState, word: '', end: false, conclusive: false};
+					//end is true when there is a dead end, no more computing, none
+					//conclusive is true when a valid answer has been reached
+
+					if (isEmpty(word)) {
+						console.log('Input word is empty');
+						newcontext.end = true;
+						newcontext.conclusive = true;
+						return newcontext; //deadEnd
+					} else {
+						var csymbol = word.substring(0, 1);
+						for (var k = 0; k < transitions.length; k++) {
+							var ctransition = transitions[k];
+							console.log('Evaluating transition');
+							console.log(ctransition);
+							if(ctransition.state === initialState && ctransition.symbol === csymbol) {
+								console.log('Transition hit');
+								newcontext.state = ctransition.nextState;
+								newcontext.word = word.substring(1, word.length);
+								return newcontext; //newTransition
+							}
+						}
+
+						console.log('No transition available');
+						newcontext.end = true;
+						newcontext.conclusive = false;
+						return newcontext; //deadEnd
+					}
+				}
+			}	
+
+		function isEmpty(str) { return (!str || 0 === str.length); }
+	}
+
+</script>
+
+</html>
