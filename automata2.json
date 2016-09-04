@@ -1,0 +1,30 @@
+//language: all words of the alphabet [0, 1] with an even number of 0's
+
+{
+	"alphabet": ["0", "1"],
+	"states": ["1", "2"],
+	"initialState": "1",
+	"finalStates": ["1"],
+	"transitions": [
+		{
+			"state": "1",
+			"symbol": "0",
+			"nextState": "2"
+		},
+		{
+			"state": "1",
+			"symbol": "1",
+			"nextState": "1"
+		},
+		{
+			"state": "2",
+			"symbol": "0",
+			"nextState": "1"
+		},
+		{
+			"state": "2",
+			"symbol": "1",
+			"nextState": "2"
+		}
+	]
+}
