@@ -1,1 +1,1 @@
-# automata-simulator
+# autonomous-simulator
