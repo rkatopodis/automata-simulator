@@ -1,6 +1,6 @@
 "use strict";
 
-function automata() {
+function automata(automataDescriptor) {
 	// automata components
 	// Hard-coded example
 	// var alphabet = ['0', '1'],
@@ -41,6 +41,14 @@ function automata() {
 	// 	];
 
 	var alphabet = [], states = [], initialState, finalStates = [], transitions = []; 
+
+	if(automataDescriptor !== undefined) {
+		alphabet = automataDescriptor.alphabet;
+		states = automataDescriptor.states;
+		initialState = automataDescriptor.initialState;
+		finalStates = automataDescriptor.finalStates;
+		transitions = automataDescriptor.transitions;
+	}
 		// Public API of the automata
 		return {
 			setAlphabet: function(a) {
